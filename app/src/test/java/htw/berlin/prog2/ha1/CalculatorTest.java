@@ -90,5 +90,16 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    @Test
+    @DisplayName("should display the number after pressing the number")
+    void testpressDigitKey(){
+        Calculator calculator = new Calculator();
+        calculator.pressDigitKey(5);
+
+        String expected = "5";
+        String actual = calculator.readScreen();
+        assertEquals(expected, actual);
+
+    }
 }
 
