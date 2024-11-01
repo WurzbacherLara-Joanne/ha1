@@ -90,6 +90,9 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    // Mein erstes aber nun obsolet
+    // Ich nehme für die erste Teilaufgabe testPercentFunction()
     @Test
     @DisplayName("should display the number after pressing the number")
     void testPressDigitKey(){
@@ -104,22 +107,52 @@ class CalculatorTest {
 
     }
 
+
+
+    // Teilaufgabe 1
     @Test
-    @DisplayName("")
-    void testPressBinaryOperatorTwice(){
+    @DisplayName("should display the entered digit as a percentage")
+    void testPercentFunction(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "0.05";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+
+    // Teilaufgabe 2
+    @Test
+    @DisplayName("Pressing the key once, clears the previously entered digits on the screen so that '0' is displayed, but without deleting any previously stored values.")
+    void testClearKeyKeepsPreviousOperation() {
         Calculator calculator = new Calculator();
 
-        calculator.pressDigitKey(9);
-        calculator.pressDigitKey(9);
+        calculator.pressDigitKey(5);
+        calculator.pressBinaryOperationKey("+");
+
+        calculator.pressDigitKey(3);
         calculator.pressClearKey();
 
-        //calculator.pressEqualsKey();
+        calculator.pressDigitKey(2);
+        calculator.pressEqualsKey();
 
-        String expected = "0";
+        String expected = "7";
         String actual = calculator.readScreen();
-
         assertEquals(expected, actual);
+    }
 
+    @Test
+    @DisplayName("should calculate the square root of 16")
+    void testsquareRoot(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(16);
+        calc.pressUnaryOperationKey("√");
+
+        String expected = "4";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
     }
 }
 
