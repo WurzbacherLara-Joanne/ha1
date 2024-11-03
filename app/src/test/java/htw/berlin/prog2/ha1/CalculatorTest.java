@@ -143,16 +143,37 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+
     @Test
     @DisplayName("should calculate the square root of 16")
-    void testsquareRoot(){
+    void testsquareroooooot(){
         Calculator calc = new Calculator();
-        calc.pressDigitKey(16);
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(6);
         calc.pressUnaryOperationKey("√");
 
-        String expected = "4";
+        String expected = "4.0";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
     }
+    @Test
+    @DisplayName("")
+    void teststh(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+
+
+        String expected = "12";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+
+
 }
 

@@ -14,6 +14,8 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private int clearCount = 0;
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -34,6 +36,9 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+
+        clearCount = 0;
+
     }
 
     /**
@@ -44,11 +49,23 @@ public class Calculator {
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
      */
-    public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+    public void pressClearKey(){
+        if (clearCount==0){
+            screen = "0";
+            clearCount++;
+        } else {
+            screen = "0";
+            latestValue = 0.0;
+            latestOperation = "";
+            clearCount = 0;
+        }
     }
+
+    // public void pressClearKey() {
+    //   screen = "0";
+    // latestOperation = "";
+    //latestValue = 0.0;
+    //}
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
@@ -62,6 +79,9 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+
+        clearCount = 0;
+
     }
 
     /**
@@ -74,16 +94,22 @@ public class Calculator {
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
-        var result = switch(operation) {
+        System.out.println("Screen before debuggung: " + screen);
+       var result = switch(operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
             case "1/x" -> 1 / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
+           default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
+       screen = Double.toString(result);
+       if(screen.equals("NaN")) screen = "Error";
+       if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+       clearCount = 0;
+
+
+
+        //Double.parseDouble(screen)
     }
 
     /**
@@ -129,5 +155,8 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+
+        clearCount = 0;
     }
 }
