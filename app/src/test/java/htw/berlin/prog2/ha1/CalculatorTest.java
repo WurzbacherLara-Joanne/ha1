@@ -95,10 +95,9 @@ class CalculatorTest {
     // Ich nehme für die erste Teilaufgabe testPercentFunction()
     @Test
     @DisplayName("should display the number after pressing the number")
-    void testPressDigitKey(){
+    void testPressDigitKey() {
         Calculator calculator = new Calculator();
         calculator.pressDigitKey(5);
-
 
 
         String expected = "5";
@@ -108,11 +107,10 @@ class CalculatorTest {
     }
 
 
-
     // Teilaufgabe 1
     @Test
     @DisplayName("should display the entered digit as a percentage")
-    void testPercentFunction(){
+    void testPercentFunction() {
         Calculator calc = new Calculator();
         calc.pressDigitKey(5);
         calc.pressUnaryOperationKey("%");
@@ -144,9 +142,10 @@ class CalculatorTest {
     }
 
 
+    // ignorieren
     @Test
     @DisplayName("should calculate the square root of 16")
-    void testsquareroooooot(){
+    void testsquareroooooot() {
         Calculator calc = new Calculator();
         calc.pressDigitKey(1);
         calc.pressDigitKey(6);
@@ -156,9 +155,11 @@ class CalculatorTest {
         String actual = calc.readScreen();
         assertEquals(expected, actual);
     }
+
+    //Teilaufgabe 2
     @Test
     @DisplayName("")
-    void teststh(){
+    void testEqualsKey() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(8);
@@ -172,7 +173,6 @@ class CalculatorTest {
         String actual = calc.readScreen();
         assertEquals(expected, actual);
     }
-
 
 
 }
